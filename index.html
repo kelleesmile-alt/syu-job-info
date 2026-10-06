@@ -1,8 +1,167 @@
-<!doctype html><html lang="ko"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>삼육대학교 대학일자리본부 채용정보</title>
-<meta property="og:title" content="삼육대학교 대학일자리본부 채용정보">
-<meta property="og:description" content="추천채용 및 일반채용 정보를 확인하세요.">
-<meta property="og:image" content="poster.png">
-<style>body{margin:0;background:#f4f7fb;font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR","Malgun Gothic",sans-serif}.wrap{max-width:600px;margin:auto;background:#fff;min-height:100vh}.poster{width:100%;display:block}.guide{text-align:center;padding:18px;color:#555;font-size:14px}</style>
-</head><body><main class="wrap"><a href="jobs.html"><img class="poster" src="poster.png" alt="삼육대학교 대학일자리본부 채용정보 포스터"></a><div class="guide">포스터를 누르면 채용정보를 확인할 수 있습니다.</div></main></body></html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>제약·바이오 맞춤 채용정보</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,"Noto Sans KR",sans-serif;background:#f5f7fb;color:#1f2937}
+.header{background:linear-gradient(135deg,#123b63,#1976a8);color:white;padding:42px 20px}
+.wrap{max-width:1180px;margin:auto}
+.badge{display:inline-block;background:rgba(255,255,255,.15);padding:7px 12px;border-radius:20px;font-size:13px;margin-bottom:14px}
+h1{margin:0 0 10px;font-size:32px}
+.sub{margin:0;color:#e4f1fa}
+.filter{background:white;margin:-25px auto 25px;border-radius:18px;padding:24px;box-shadow:0 8px 30px rgba(0,0,0,.08)}
+.filter h2{font-size:18px;margin:0 0 18px}
+.group{margin-bottom:18px}
+.group-title{font-size:14px;font-weight:700;margin-bottom:9px}
+.options{display:flex;flex-wrap:wrap;gap:8px}
+.option{border:1px solid #d7dee8;background:#fff;border-radius:20px;padding:8px 13px;cursor:pointer;font-size:13px;transition:.15s}
+.option:hover{border-color:#1976a8}
+.option.active{background:#e7f4fb;border-color:#1976a8;color:#11648e;font-weight:700}
+.actions{display:flex;gap:10px;margin-top:20px}
+button{border:0;border-radius:10px;padding:12px 22px;font-weight:700;cursor:pointer}
+.search-btn{background:#176d9e;color:white}
+.reset-btn{background:#eef1f5;color:#4b5563}
+.result-head{display:flex;justify-content:space-between;align-items:center;margin:25px 0 14px}
+.result-head h2{margin:0;font-size:20px}
+.count{color:#176d9e;font-weight:700}
+.sort{padding:9px;border:1px solid #d7dee8;border-radius:8px;background:white}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
+.card{background:white;border-radius:15px;padding:20px;border:1px solid #e5eaf0;box-shadow:0 3px 12px rgba(0,0,0,.04)}
+.company{font-weight:700;color:#176d9e;font-size:14px}
+.title{font-size:18px;font-weight:700;margin:8px 0 14px;line-height:1.4}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.tag{background:#f1f5f9;padding:5px 8px;border-radius:6px;font-size:12px;color:#475569}
+.meta{font-size:13px;color:#667085;line-height:1.9}
+.view{display:inline-block;margin-top:14px;color:#176d9e;font-weight:700;text-decoration:none;font-size:13px}
+.empty{background:white;padding:45px;text-align:center;border-radius:15px;color:#667085}
+.footer{text-align:center;padding:35px 15px;color:#7b8794;font-size:12px}
+.powered{margin-top:7px;font-weight:700}
+@media(max-width:700px){
+ h1{font-size:25px}.cards{grid-template-columns:1fr}.filter{margin-left:12px;margin-right:12px;padding:18px}
+ .result-head{align-items:flex-start;gap:10px;flex-direction:column}.actions button{flex:1}
+}
+</style>
+</head>
+<body>
+<header class="header">
+<div class="wrap">
+<span class="badge">학과·전공 맞춤 취업정보</span>
+<h1>🧬 제약·바이오 맞춤 채용정보</h1>
+<p class="sub">제약·바이오 · 화장품 · 건강기능성식품 · 식품 · 축산 분야 채용공고를 한눈에 확인하세요.</p>
+</div>
+</header>
+
+<main class="wrap">
+<section class="filter">
+<h2>🔎 맞춤 조건을 선택하세요</h2>
+<div id="filterGroups"></div>
+<div class="actions">
+<button class="search-btn" onclick="renderJobs()">선택 조건으로 검색하기</button>
+<button class="reset-btn" onclick="resetFilters()">전체 초기화</button>
+</div>
+</section>
+
+<section>
+<div class="result-head">
+<h2>채용공고 <span class="count" id="resultCount"></span></h2>
+<select class="sort" id="sort" onchange="renderJobs()">
+<option value="latest">최신순</option>
+<option value="deadline">마감임박순</option>
+</select>
+</div>
+<div class="cards" id="jobList"></div>
+</section>
+</main>
+
+<footer class="footer">
+<div>본 페이지는 제약·바이오 계열 취업상담을 위한 맞춤형 채용정보 화면입니다.</div>
+<div class="powered">Powered by 취업 사람인</div>
+</footer>
+
+<script>
+const filterData = {
+ industry:["제약/바이오","화장품","건강기능성식품","식품","축산"],
+ company:["대기업","외국계","중견기업","중소기업","상장사"],
+ region:["서울","경기도","인천","충북","충남","강원도"],
+ job:["QC","QA","위생관리","공정기술","생산/제조","엔지니어","생산/공정 관리","구매","연구개발","영업","영업관리"],
+ type:["정규직","계약직","인턴","일경험"],
+ edu:["고등학교 이상","2,3년제 이상","학사","학사이상"]
+};
+
+const jobs = [
+ {company:"샘플제약",title:"의약품 품질관리(QC) 신입/경력 채용",industry:"제약/바이오",companyType:["중견기업","상장사"],region:"경기도",job:["QC","QA"],type:"정규직",edu:["학사","학사이상"],date:"2026-10-20",url:"https://www.saramin.co.kr/"},
+ {company:"바이오테크코리아",title:"바이오의약품 연구개발(R&D) 연구원 채용",industry:"제약/바이오",companyType:["중소기업"],region:"서울",job:["연구개발"],type:"정규직",edu:["학사","학사이상"],date:"2026-10-25",url:"https://www.saramin.co.kr/"},
+ {company:"그린푸드",title:"식품 품질관리 및 HACCP 담당자 채용",industry:"식품",companyType:["중견기업"],region:"충북",job:["QC","위생관리"],type:"정규직",edu:["2,3년제 이상","학사"],date:"2026-10-15",url:"https://www.saramin.co.kr/"},
+ {company:"뷰티랩",title:"화장품 품질관리(QA/QC) 담당자 채용",industry:"화장품",companyType:["중소기업"],region:"인천",job:["QC","QA"],type:"계약직",edu:["학사","학사이상"],date:"2026-10-18",url:"https://www.saramin.co.kr/"},
+ {company:"헬스원",title:"건강기능식품 생산관리 신입사원 모집",industry:"건강기능성식품",companyType:["중견기업","상장사"],region:"충남",job:["생산/제조","생산/공정 관리"],type:"정규직",edu:["2,3년제 이상","학사"],date:"2026-10-28",url:"https://www.saramin.co.kr/"},
+ {company:"글로벌파마",title:"Global Pharma QA Specialist 채용",industry:"제약/바이오",companyType:["외국계"],region:"서울",job:["QA","영업관리"],type:"정규직",edu:["학사이상"],date:"2026-10-22",url:"https://www.saramin.co.kr/"},
+ {company:"한빛바이오",title:"제약 생산공정기술 및 엔지니어 신입 채용",industry:"제약/바이오",companyType:["중소기업"],region:"강원도",job:["공정기술","엔지니어","생산/공정 관리"],type:"정규직",edu:["학사"],date:"2026-10-30",url:"https://www.saramin.co.kr/"},
+ {company:"애니팜",title:"동물의약품 영업 및 영업관리 신입/경력",industry:"축산",companyType:["중소기업"],region:"경기도",job:["영업","영업관리"],type:"정규직",edu:["고등학교 이상","학사"],date:"2026-10-12",url:"https://www.saramin.co.kr/"},
+ {company:"푸드솔루션",title:"식품 구매 및 생산관리 담당자 채용",industry:"식품",companyType:["중견기업"],region:"서울",job:["구매","생산/공정 관리"],type:"정규직",edu:["2,3년제 이상"],date:"2026-10-17",url:"https://www.saramin.co.kr/"},
+ {company:"코스메디",title:"화장품 연구개발(R&D) 인턴 채용",industry:"화장품",companyType:["중소기업"],region:"경기도",job:["연구개발"],type:"인턴",edu:["학사"],date:"2026-10-24",url:"https://www.saramin.co.kr/"}
+];
+
+const selected = {};
+Object.keys(filterData).forEach(k=>selected[k]=new Set());
+
+function makeFilters(){
+ const root=document.getElementById("filterGroups");
+ const labels={industry:"산업분야",company:"기업규모",region:"지역",job:"직무",type:"고용형태",edu:"학력"};
+ Object.keys(filterData).forEach(key=>{
+   const group=document.createElement("div"); group.className="group";
+   group.innerHTML=`<div class="group-title">${labels[key]}</div><div class="options"></div>`;
+   const box=group.querySelector(".options");
+   filterData[key].forEach(v=>{
+     const b=document.createElement("button"); b.className="option"; b.textContent=v; b.type="button";
+     b.onclick=()=>{ if(selected[key].has(v)){selected[key].delete(v);b.classList.remove("active")}else{selected[key].add(v);b.classList.add("active")} };
+     box.appendChild(b);
+   });
+   root.appendChild(group);
+ });
+}
+
+function match(job){
+ if(selected.industry.size && !selected.industry.has(job.industry)) return false;
+ if(selected.company.size && !job.companyType.some(x=>selected.company.has(x))) return false;
+ if(selected.region.size && !selected.region.has(job.region)) return false;
+ if(selected.job.size && !job.job.some(x=>selected.job.has(x))) return false;
+ if(selected.type.size && !selected.type.has(job.type)) return false;
+ if(selected.edu.size && !job.edu.some(x=>selected.edu.has(x))) return false;
+ return true;
+}
+
+function renderJobs(){
+ let list=jobs.filter(match);
+ const sort=document.getElementById("sort").value;
+ list.sort((a,b)=>sort==="deadline"?new Date(a.date)-new Date(b.date):b.company.localeCompare(a.company));
+ document.getElementById("resultCount").textContent=`${list.length}건`;
+ const root=document.getElementById("jobList");
+ if(!list.length){root.innerHTML='<div class="empty">선택한 조건에 맞는 샘플 채용공고가 없습니다.<br>조건을 조금 완화해 보세요.</div>';return;}
+ root.innerHTML=list.map(j=>`
+ <article class="card">
+   <div class="company">${j.company}</div>
+   <div class="title">${j.title}</div>
+   <div class="tags">
+     <span class="tag">${j.industry}</span>
+     ${j.companyType.map(x=>`<span class="tag">${x}</span>`).join("")}
+     ${j.job.slice(0,3).map(x=>`<span class="tag">${x}</span>`).join("")}
+   </div>
+   <div class="meta">📍 ${j.region}<br>💼 ${j.type}<br>🎓 ${j.edu.join(" · ")}<br>📅 마감 ${j.date}</div>
+   <a class="view" href="${j.url}" target="_blank" rel="noopener">사람인에서 공고 보기 →</a>
+ </article>`).join("");
+}
+
+function resetFilters(){
+ Object.keys(selected).forEach(k=>selected[k].clear());
+ document.querySelectorAll(".option").forEach(b=>b.classList.remove("active"));
+ renderJobs();
+}
+
+makeFilters();
+renderJobs();
+</script>
+</body>
+</html>
