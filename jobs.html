@@ -1,0 +1,25 @@
+<!doctype html><html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>삼육대학교 대학일자리본부 채용정보</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f4f7fb;color:#18212f;font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR","Malgun Gothic",sans-serif}.wrap{max-width:720px;margin:auto}
+header{background:#183b67;color:white;padding:24px 18px}header h1{font-size:21px;margin:0 0 7px}header p{margin:0;font-size:13px}.search{padding:14px;background:white;position:sticky;top:0}.search input{width:100%;padding:12px;border:1px solid #d9dee7;border-radius:12px;font-size:15px}
+.tabs,.chips{display:flex;gap:8px;padding:10px 14px;overflow:auto;background:white}.tabs button,.chips button{border:1px solid #dfe4ec;background:white;border-radius:20px;padding:9px 13px;white-space:nowrap}.active{background:#183b67!important;color:white;border-color:#183b67!important}
+.card{background:white;margin:8px 14px;padding:17px;border-radius:16px;box-shadow:0 2px 10px rgba(30,50,80,.07)}.badge{display:inline-block;font-size:11px;padding:5px 8px;border-radius:7px;background:#eef4ff;color:#24558e}.company{color:#596579;font-size:14px;margin:8px 0 5px}.title{font-size:17px;font-weight:700;line-height:1.4}.meta{font-size:13px;color:#566274;line-height:1.8;margin-top:10px}.deadline{color:#d94b4b;font-weight:700}.actions{display:flex;gap:8px;margin-top:14px}.actions a{flex:1;text-align:center;padding:11px 7px;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none}.detail{background:#eef2f7;color:#24364d}.apply{background:#183b67;color:white}
+</style></head><body><div class="wrap"><header><h1>삼육대학교 대학일자리본부</h1><p>나에게 맞는 채용정보를 찾아보세요</p></header>
+<div class="search"><input id="search" type="search" placeholder="회사명·채용직무 검색"></div>
+<div class="tabs"><button class="active" data-type="전체">전체 채용</button><button data-type="추천채용">추천채용</button><button data-type="일반채용">일반채용</button></div>
+<div class="chips"><button class="active" data-major="전체">전체</button><button data-major="컴퓨터·AI">컴퓨터·AI</button><button data-major="경영·경제">경영·경제</button><button data-major="인문·사회">인문·사회</button><button data-major="이공·자연">이공·자연</button><button data-major="보건">보건</button><button data-major="디자인">디자인</button><button data-major="관광·호텔·항공">관광·호텔·항공</button></div>
+<section id="list"></section></div>
+<script>
+const APPLY="https://forms.gle/fCz3WaVfGpvRxiGe6";
+const jobs=[
+{type:"추천채용",company:"토스페이먼츠",title:"Sales Development Specialist 1차 대규모 채용",major:"경영·경제",job:"영업·세일즈",location:"서울",deadline:"10/30(금) 오전",url:"https://www.syu.ac.kr/blog/%ed%86%a0%ec%8a%a4%ed%8e%98%ec%9d%b4%eb%a8%bc%ec%b8%a0sales-development-specialist-1%ec%b0%a8-%eb%8c%80%ea%b7%9c%eb%aa%a8-%ec%b1%84%ec%9a%a910-30%ea%b8%88-%ec%98%a4%ec%a0%84/?pageds=1&k=&t=&c="},
+{type:"추천채용",company:"포스뱅크",title:"신입 및 경력 채용",major:"컴퓨터·AI",job:"IT·개발",location:"서울",deadline:"채용공고 확인",url:"https://www.syu.ac.kr/university-square/notice/job-offer/"},
+{type:"일반채용",company:"삼육대학교",title:"외부기관 채용정보 확인",major:"전체",job:"다양한 직무",location:"전국",deadline:"상시 확인",url:"https://www.syu.ac.kr/university-square/notice/external-notice/"}];
+let type="전체",major="전체";
+function render(){let q=document.getElementById("search").value.toLowerCase();let a=jobs.filter(j=>(type=="전체"||j.type==type)&&(major=="전체"||j.major==major||j.major=="전체")&&(!q||(j.company+" "+j.title+" "+j.job).toLowerCase().includes(q)));document.getElementById("list").innerHTML=a.map(j=>`<article class="card"><span class="badge">${j.type}</span><div class="company">${j.company}</div><div class="title">${j.title}</div><div class="meta">전공 · ${j.major}<br>직무 · ${j.job}<br>근무지 · ${j.location}<br>마감 · <span class="deadline">${j.deadline}</span></div><div class="actions"><a class="detail" href="${j.url}" target="_blank">자세히 보기</a>${j.type=="추천채용"?`<a class="apply" href="${APPLY}" target="_blank">신청서 작성</a>`:""}</div></article>`).join("")||'<div style="text-align:center;padding:50px;color:#777">조건에 맞는 채용정보가 없습니다.</div>'}
+document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tabs button").forEach(x=>x.classList.remove("active"));b.classList.add("active");type=b.dataset.type;render()});
+document.querySelectorAll(".chips button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".chips button").forEach(x=>x.classList.remove("active"));b.classList.add("active");major=b.dataset.major;render()});
+document.getElementById("search").oninput=render;render();
+</script></body></html>
