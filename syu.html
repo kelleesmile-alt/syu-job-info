@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SYU 채용정보 | 추천채용/일반채용</title>
+<meta name="description" content="삼육대학교 대학일자리본부 SYU 채용정보 - 추천채용/일반채용">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SYU 채용정보">
+<meta property="og:description" content="추천채용 / 일반채용을 한눈에 확인하세요.">
+<meta property="og:image" content="share-card.png">
+<meta name="theme-color" content="#1769d1">
+<style>
+:root{
+  --navy:#173b68; --blue:#2563eb; --sky:#eaf2ff; --mint:#eafaf4;
+  --green:#159570; --red:#ef4444; --ink:#152238; --muted:#718096;
+  --line:#e8edf3; --bg:#f6f8fb; --white:#fff; --shadow:0 10px 28px rgba(22,42,70,.08);
+}
+*{box-sizing:border-box} body{margin:0;background:#eef2f7;color:var(--ink);font-family:Arial,"Noto Sans KR",sans-serif}
+button,input{font:inherit}.app{max-width:480px;margin:0 auto;background:var(--bg);min-height:100vh}
+.header{background:linear-gradient(145deg,#124f9c,#178fdf);color:#fff;padding:27px 20px 22px;border-radius:0 0 26px 26px}
+.header .brand{font-size:13px;font-weight:700;opacity:.82}.header h1{font-size:30px;line-height:1.2;margin:10px 0 5px;letter-spacing:-.7px}.header p{margin:0;font-size:13px;opacity:.82}
+.search{margin:18px 0 0;background:#fff;border-radius:15px;padding:12px 14px;display:flex;gap:8px;align-items:center}
+.search input{border:0;outline:0;width:100%;font-size:14px}.search span{color:#7b8794}
+.content{padding:16px}
+.tabs{display:grid;grid-template-columns:1fr 1fr 1fr;background:#e9eef5;padding:4px;border-radius:13px;margin-bottom:12px}
+.tab{border:0;background:transparent;border-radius:10px;padding:11px;font-weight:700;color:#64748b;cursor:pointer}.tab.active{background:#fff;color:var(--navy);box-shadow:0 2px 8px #0000000d}
+.sectionTitle{display:flex;justify-content:space-between;align-items:center;margin:14px 2px 10px}
+.sectionTitle strong{font-size:16px}.count{font-size:12px;color:var(--muted)}
+.chips{display:flex;gap:7px;overflow:auto;padding-bottom:4px;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}
+.chip{white-space:nowrap;border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 12px;font-size:12px;color:#526174;cursor:pointer}.chip.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:11px;box-shadow:0 5px 18px #2038580a}
+.badges{display:flex;gap:6px;margin-bottom:10px}.badge{font-size:10px;font-weight:800;padding:5px 8px;border-radius:6px}.recommend{background:#eaf2ff;color:#2563eb}.normal{background:#eef2f5;color:#667085}.urgent{background:#fff0f0;color:#e13b3b}
+.company{font-size:12px;color:#6b7280;margin-bottom:3px}.title{font-size:16px;font-weight:800;line-height:1.4}.meta{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:13px 0;color:#596779;font-size:12px}
+.meta b{color:#25364d}.deadline{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #eef1f5;padding-top:11px}.dleft{font-size:12px}.dday{font-weight:800;color:var(--red)}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.btn{border:0;border-radius:10px;padding:10px 8px;font-size:12px;font-weight:800;cursor:pointer}.detail{background:#f0f4f8;color:#34465e}.apply{background:var(--navy);color:#fff}
+.empty{text-align:center;padding:45px 15px;color:var(--muted);background:#fff;border-radius:18px}
+.modal{position:fixed;inset:0;background:#0007;display:none;align-items:flex-end;z-index:10}.modal.show{display:flex}.sheet{background:#fff;width:100%;max-width:480px;margin:auto auto 0;border-radius:25px 25px 0 0;max-height:86vh;overflow:auto;padding:20px}
+.close{float:right;border:0;background:#f1f4f8;border-radius:50%;width:32px;height:32px;cursor:pointer}.sheet h2{margin:5px 45px 4px 0;font-size:21px}.sheet .company2{color:#667085;font-size:13px}.info{margin-top:18px;border-top:1px solid var(--line)}.row{display:flex;padding:12px 0;border-bottom:1px solid var(--line);font-size:13px}.row label{width:90px;color:#7a8797}.row span{font-weight:700}.note{background:#f6f8fb;border-radius:13px;padding:13px;margin:15px 0;font-size:12px;line-height:1.6}.sheet .full{width:100%;margin-top:4px}
+.footer{padding:15px 4px 35px;text-align:center;color:#94a0af;font-size:10px}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="header">
+  <div class="brand">삼육대학교 대학일자리본부</div>
+  <h1>SYU 채용정보</h1>
+  <p>추천채용 / 일반채용</p>
+  <div class="search"><span>⌕</span><input id="search" placeholder="기업명·직무 검색"></div>
+  
+</header>
+<main class="content">
+  <div class="tabs">
+    <button class="tab active" data-type="all">전체 채용</button>
+    <button class="tab" data-type="recommend">추천채용</button>
+    <button class="tab" data-type="normal">일반채용</button>
+  </div>
+  <div class="sectionTitle"><strong>전공계열</strong><span class="count" id="count"></span></div>
+  <div class="chips" id="chips">
+    <button class="chip active" data-major="전체">전체</button>
+    <button class="chip" data-major="컴퓨터·AI">컴퓨터·AI</button>
+    <button class="chip" data-major="경영·경제">경영·경제</button>
+    <button class="chip" data-major="인문·사회">인문·사회</button>
+    <button class="chip" data-major="이공·자연">이공·자연</button>
+    <button class="chip" data-major="보건">보건</button>
+    <button class="chip" data-major="디자인">디자인</button>
+    <button class="chip" data-major="관광·호텔·항공">관광·호텔·항공</button>
+  </div>
+  <div class="sectionTitle"><strong id="listTitle">최근 업로드 채용공고</strong><span>최근 업로드순</span></div>
+  <div id="list"></div>
+  <div class="footer">※ 채용정보는 삼육대학교 게시판 기준입니다. 지원 전 원문 공고의 마감시간·지원자격을 반드시 확인하세요.</div>
+</main>
+</div>
+<div class="modal" id="modal">
+ <div class="sheet">
+  <button class="close" onclick="closeModal()">×</button>
+  <div id="modalBody"></div>
+ </div>
+</div>
+<script>
+const jobs=[{'id': 1, 'type': 'recommend', 'company': '토스페이먼츠', 'title': 'Sales Development Specialist 1차 대규모 채용', 'major': '경영·경제', 'job': 'Sales Development / 세일즈', 'deadline': '2026-10-30', 'place': '서울', 'apply': '추천채용 신청서', 'url': 'https://www.syu.ac.kr/blog/%ed%86%a0%ec%8a%a4%ed%8e%98%ec%9d%b4%eb%a8%bc%ec%b8%a0sales-development-specialist-1%ec%b0%a8-%eb%8c%80%ea%b7%9c%eb%aa%a8-%ec%b1%84%ec%9a%a910-30%ea%b8%88-%ec%98%a4%ec%a0%84/?pageds=1&k=&t=&c='}, {'id': 2, 'type': 'recommend', 'company': '이랜드파크', 'title': '26하반기 서비스인턴십 31기 채용', 'major': '관광·호텔·항공', 'job': '프런트 / F&B / 조리 / 콘텐츠', 'deadline': '2026-10-23', 'place': '강원권', 'apply': '추천채용 신청서', 'url': 'https://www.syu.ac.kr/blog/%EC%9D%B4%EB%9E%9C%EB%93%9C%ED%8C%8C%ED%81%AC26%ED%95%98%EB%B0%98%EA%B8%B0-%EC%84%9C%EB%B9%84%EC%8A%A4%EC%9D%B8%ED%84%B4%EC%8B%AD-31%EA%B8%B0-%EC%B1%84%EC%9A%A910-23%EA%B8%88/'}, {'id': 3, 'type': 'recommend', 'company': '포스뱅크', 'title': '신입사원 공개채용', 'major': '컴퓨터·AI / 이공·자연', 'job': '전산개발 / 임베디드 / 설계 / 생산', 'deadline': '2026-10-11', 'place': '서울·평택', 'apply': '추천채용 신청서', 'url': 'https://www.syu.ac.kr/blog/%ED%8F%AC%EC%8A%A4%EB%B1%85%ED%81%AC-%EC%8B%A0%EC%9E%85%EC%82%AC%EC%9B%90-%EA%B3%B5%EA%B0%9C%EC%B1%84%EC%9A%A9/'}, {'id': 101, 'type': 'normal', 'company': '2026 청년일자리 강소기업', 'title': '청년일자리 강소기업 채용', 'major': '전체', 'job': '기업별 채용', 'deadline': null, 'place': '공고별 상이', 'apply': '신청서 작성', 'url': 'https://www.syu.ac.kr/blog/2026-%EC%B2%AD%EB%85%84%EC%9D%BC%EC%9E%90%EB%A6%AC-%EA%B0%95%EC%86%8C%EA%B8%B0%EC%97%85-%EC%B1%84%EC%9A%A9/'}, {'id': 102, 'type': 'normal', 'company': '제일약품', 'title': '제일약품 그룹 부문별 인재모집', 'major': '이공·자연 / 보건', 'job': '그룹 부문별 채용', 'deadline': null, 'place': '공고별 상이', 'apply': '신청서 작성', 'url': 'https://www.syu.ac.kr/blog/%EC%A0%9C%EC%9D%BC%EC%95%BD%ED%92%88-%EA%B7%B8%EB%A3%B9-%EB%B6%80%EB%AC%B8%EB%B3%84-%EC%9D%B8%EC%9E%AC%EB%AA%A8%EC%A7%91/'}, {'id': 103, 'type': 'normal', 'company': '삼양케이씨아이', 'title': '2026년 신입 수시 채용 - SCM팀 수출입 담당', 'major': '경영·경제 / 물류', 'job': 'SCM / 수출입', 'deadline': null, 'place': '서울', 'apply': '신청서 작성', 'url': 'https://www.syu.ac.kr/blog/%EC%82%BC%EC%96%91%EC%BC%80%EC%94%A8%EC%95%84%EC%9D%B4-2026%EB%85%84-%EC%8B%A0%EC%9E%85-%EC%88%98%EC%8B%9C-%EC%B1%84%EC%9A%A9-scm%ED%8C%80-%EC%88%98-%EC%B6%9C%EC%9E%85-%EB%8B%B4%EB%8B%B9/'}, {'id': 104, 'type': 'normal', 'company': '극지연구소', 'title': '2026년 하반기(2차) 기간제계약직(사무행정) 채용', 'major': '인문·사회 / 경영', 'job': '사무행정', 'deadline': '2026-10-15', 'place': '인천', 'apply': '신청서 작성', 'url': 'https://www.syu.ac.kr/blog/2026%EB%85%84-%ED%95%98%EB%B0%98%EA%B8%B02%EC%B0%A8-%EA%B7%B9%EC%A7%80%EC%97%B0%EA%B5%AC%EC%86%8C-%EA%B8%B0%EA%B0%84%EC%A0%9C%EA%B3%84%EC%95%BD%EC%A7%81%EC%82%AC%EB%AC%B4%ED%96%89%EC%A0%95/'}, {'id': 105, 'type': 'normal', 'company': 'S-OIL', 'title': '2026 사무직 신입사원 채용', 'major': '경영·경제 / 인문·사회', 'job': '사무직', 'deadline': '2026-10-14', 'place': '서울', 'apply': '신청서 작성', 'url': 'https://www.syu.ac.kr/blog/s-oil-2026-%EC%82%AC%EB%AC%B4%EC%A7%81-%EC%8B%A0%EC%9E%85%EC%82%AC%EC%9B%90-%EC%B1%84%EC%9A%A9-10-14-2359/'}, {'id': 106, 'type': 'normal', 'company': '동원그룹', 'title': '2026 하반기 신입사원 채용', 'major': '전체', 'job': '그룹사 신입채용', 'deadline': '2026-10-06', 'place': '공고별 상이', 'apply': '신청서 작성', 'url': 'https://www.syu.ac.kr/blog/%EB%8F%99%EC%9B%90%EA%B7%B8%EB%A3%B9-2026-%ED%95%98%EB%B0%98%EA%B8%B0-%EC%8B%A0%EC%9E%85%EC%82%AC%EC%9B%90-%EC%B1%84%EC%9A%A9-10-6-1400/'}, {'id': 107, 'type': 'normal', 'company': '현대오토에버', 'title': '2026 4분기 신입사원 채용', 'major': '컴퓨터·AI', 'job': 'SW / IT', 'deadline': null, 'place': '서울', 'apply': '신청서 작성', 'url': 'https://www.syu.ac.kr/blog/%ED%98%84%EB%8C%80%EC%98%A4%ED%86%A0%EC%97%90%EB%B2%84-2026-4%EB%B6%84%EA%B8%B0-%EC%8B%A0%EC%9E%85%EC%82%AC%EC%9B%90-%EC%B1%84%EC%9A%A9/'}, {'id': 108, 'type': 'normal', 'company': '대보그룹', 'title': '2026년 신입사원 공개채용', 'major': '경영·경제 / 이공·자연', 'job': '그룹사 신입채용', 'deadline': null, 'place': '공고별 상이', 'apply': '신청서 작성', 'url': 'https://www.syu.ac.kr/blog/%EB%8C%80%EB%B3%B4%EA%B7%B8%EB%A3%B9-2026%EB%85%84-%EC%8B%A0%EC%9E%85%EC%82%AC%EC%9B%90-%EA%B3%B5%EA%B0%9C%EC%B1%84%EC%9A%A9/'}, {'id': 109, 'type': 'normal', 'company': '어플라이드 머티어리얼즈 코리아', 'title': '신입 채용', 'major': '이공·자연 / 컴퓨터·AI', 'job': '반도체 장비 / 엔지니어', 'deadline': null, 'place': '경기', 'apply': '신청서 작성', 'url': 'https://www.syu.ac.kr/blog/%EC%96%B4%ED%94%8C%EB%9D%BC%EC%9D%B4%EB%93%9C-%EB%A8%B8%ED%8B%B0%EC%96%B4%EB%A6%AC%EC%96%BC%EC%A6%88-%EC%BD%94%EB%A6%AC%EC%95%84-%EC%8B%A0%EC%9E%85-%EC%B1%84%EC%9A%A9/'}, {'id': 110, 'type': 'normal', 'company': '서울외국환중개', 'title': '2026년 성과전문직원(신입 계약직) 채용', 'major': '경영·경제', 'job': '금융 / 사무', 'deadline': null, 'place': '서울', 'apply': '신청서 작성', 'url': 'https://www.syu.ac.kr/blog/%EC%84%9C%EC%9A%B8%EC%99%B8%EA%B5%AD%ED%99%98%EC%A4%91%EA%B0%9C-2026%EB%85%84-%EC%84%B1%EA%B3%BC%EC%A0%84%EB%AC%B8%EC%A7%81%EC%9B%90%EC%8B%A0%EC%9E%85-%EA%B3%84%EC%95%BD%EC%A7%81-%EC%B1%84/'}, {'id': 111, 'type': 'normal', 'company': '한국식품연구원', 'title': '2026년 제2차 정규직 및 무기계약직 채용', 'major': '이공·자연 / 보건', 'job': '연구 / 행정', 'deadline': null, 'place': '전북', 'apply': '신청서 작성', 'url': 'https://www.syu.ac.kr/blog/%ED%95%9C%EA%B5%AD%EC%8B%9D%ED%92%88%EC%97%B0%EA%B5%AC%EC%9B%90-2026%EB%85%84-%EC%A0%9C2%EC%B0%A8-%EC%A0%95%EA%B7%9C%EC%A7%81-%EB%B0%8F-%EB%AC%B4%EA%B8%B0%EA%B3%84%EC%95%BD%EC%A7%81-%EC%B1%84%EC%9A%A9/'}, {'id': 112, 'type': 'normal', 'company': '서울신문', 'title': '인사팀 수습기자 공개채용', 'major': '인문·사회', 'job': '기자 / 언론', 'deadline': null, 'place': '서울', 'apply': '신청서 작성', 'url': 'https://www.syu.ac.kr/blog/%EC%84%9C%EC%9A%B8%EC%8B%A0%EB%AC%B8-%EC%9D%B8%EC%82%AC%ED%8C%80-%EC%88%98%EC%8A%B5%EA%B8%B0%EC%9E%90-%EA%B3%B5%EA%B0%9C%EC%B1%84%EC%9A%A9/'}, {'id': 113, 'type': 'normal', 'company': '굿네이버스 인터내셔날', 'title': '2027년 상반기 신입직원 공개채용', 'major': '인문·사회 / 보건', 'job': 'NGO / 사업', 'deadline': null, 'place': '서울', 'apply': '신청서 작성', 'url': 'https://www.syu.ac.kr/blog/%EC%82%AC%EB%8B%A8%EB%B2%95%EC%9D%B8-%EA%B5%BF%EB%84%A4%EC%9D%B4%EB%B2%84%EC%8A%A4-%EC%9D%B8%ED%84%B0%EB%82%B4%EC%85%94%EB%84%90-2027%EB%85%84-%EC%83%81%EB%B0%98%EA%B8%B0-%EC%8B%A0%EC%9E%85%EC%A7%81/'}, {'id': 114, 'type': 'normal', 'company': '경기창조경제혁신센터', 'title': '직원 채용', 'major': '경영·경제 / 인문·사회', 'job': '창업지원 / 경영지원', 'deadline': null, 'place': '경기', 'apply': '신청서 작성', 'url': 'https://www.syu.ac.kr/blog/%EA%B2%BD%EA%B8%B0%EC%B0%BD%EC%A1%B0%EA%B2%BD%EC%A0%9C%ED%98%81%EC%8B%A0%EC%84%BC%ED%84%B0-%EC%A7%81%EC%9B%90-%EC%B1%84%EC%9A%A9/'}, {'id': 115, 'type': 'normal', 'company': '컴투스', 'title': 'QA 담당자 채용', 'major': '컴퓨터·AI', 'job': '게임 QA', 'deadline': null, 'place': '서울', 'apply': '신청서 작성', 'url': 'https://www.syu.ac.kr/blog/%EC%BB%B4%ED%88%AC%EC%8A%A4-qa-%EB%8B%B4%EB%8B%B9%EC%9E%90-%EC%B1%84%EC%9A%A9/'}, {'id': 116, 'type': 'normal', 'company': '코리안리재보험', 'title': '2026년 신입채용', 'major': '경영·경제 / 수학·통계', 'job': '보험 / 금융', 'deadline': null, 'place': '서울', 'apply': '신청서 작성', 'url': 'https://www.syu.ac.kr/blog/%EC%BD%94%EB%A6%AC%EC%95%88%EB%A6%AC%EC%9E%AC%EB%B3%B4%ED%97%98-2026%EB%85%84-%EC%8B%A0%EC%9E%85%EC%B1%84%EC%9A%A9/'}, {'id': 117, 'type': 'normal', 'company': '2026년 하반기 컨설팅 세일즈', 'title': '컨설팅 세일즈 신입사원 채용', 'major': '경영·경제 / 전체', 'job': '컨설팅 세일즈', 'deadline': '2026-10-18', 'place': '서울', 'apply': '신청서 작성', 'url': 'https://www.syu.ac.kr/blog/2026%EB%85%84-%ED%95%98%EB%B0%98%EA%B8%B0-%EC%BB%A8%EC%84%A4%ED%8C%85-%EC%84%B8%EC%9D%BC%EC%A6%88-%EC%8B%A0%EC%9E%85%EC%82%AC%EC%9B%90-%EC%B1%84%EC%9A%A9/'}, {'id': 118, 'type': 'normal', 'company': '스포츠윤리센터', 'title': '2026년 제2차 직원 신규채용', 'major': '인문·사회 / 체육', 'job': '기관 운영 / 행정', 'deadline': '2026-10-13', 'place': '서울', 'apply': '신청서 작성', 'url': 'https://www.syu.ac.kr/blog/%EC%8A%A4%ED%8F%AC%EC%B8%A0%EC%9C%A4%EB%A6%AC%EC%84%BC%ED%84%B0-2026%EB%85%84-%EC%A0%9C2%EC%B0%A8-%EC%A7%81%EC%9B%90-%EC%8B%A0%EA%B7%9C%EC%B1%84%EC%9A%A9-%EA%B3%B5%EA%B3%A010-13/'}, {'id': 119, 'type': 'normal', 'company': '한국농수산식품유통공사', 'title': '2026년 신입직원 채용', 'major': '경영·경제 / 식품', 'job': '공공기관 / 경영', 'deadline': '2026-10-13', 'place': '전국', 'apply': '신청서 작성', 'url': 'https://www.syu.ac.kr/blog/%ED%95%9C%EA%B5%AD%EB%86%8D%EC%88%98%EC%82%B0%EC%8B%9D%ED%92%88%EC%9C%A0%ED%86%B5%EA%B3%B5%EC%82%AC-2026%EB%85%84-%EC%8B%A0%EC%9E%85%EC%A7%81%EC%9B%90-%EC%B1%84%EC%9A%A9%EA%B3%B5%EA%B3%A010-13/'}, {'id': 120, 'type': 'normal', 'company': '한국수출입은행', 'title': '2026년 하반기 별정직(KSP/EIPP연구원) 채용', 'major': '경영·경제 / 국제', 'job': '연구원', 'deadline': null, 'place': '서울', 'apply': '신청서 작성', 'url': 'https://www.syu.ac.kr/blog/2026%EB%85%84-%ED%95%9C%EA%B5%AD%EC%88%98%EC%B6%9C%EC%9E%85%EC%9D%80%ED%96%89-%ED%95%98%EB%B0%98%EA%B8%B0-%EB%B3%84%EC%A0%95%EC%A7%81ksp-eipp%EC%97%B0%EA%B5%AC%EC%9B%90-%EC%B1%84%EC%9A%A9%EA%B3%B5/'}, {'id': 121, 'type': 'normal', 'company': '서울대학교', 'title': '2026년도 하반기 직원 신규채용', 'major': '전체', 'job': '대학 행정 / 기술', 'deadline': null, 'place': '서울', 'apply': '신청서 작성', 'url': 'https://www.syu.ac.kr/blog/%EC%84%9C%EC%9A%B8%EB%8C%80%ED%95%99%EA%B5%90-2026%EB%85%84%EB%8F%84-%ED%95%98%EB%B0%98%EA%B8%B0-%EC%A7%81%EC%9B%90-%EC%8B%A0%EA%B7%9C%EC%B1%84%EC%9A%A9/'}, {'id': 122, 'type': 'normal', 'company': '가축위생방역지원본부', 'title': '2026년 하반기 정규직/기간제근로자 채용', 'major': '이공·자연 / 보건', 'job': '방역 / 행정', 'deadline': null, 'place': '전국', 'apply': '신청서 작성', 'url': 'https://www.syu.ac.kr/blog/%EA%B0%80%EC%B6%95%EC%9C%84%EC%83%9D%EB%B0%A9%EC%97%AD%EC%A7%80%EC%9B%90%EB%B3%B8%EB%B6%80-2026%EB%85%84-%ED%95%98%EB%B0%98%EA%B8%B0-%EC%A0%95%EA%B7%9C%EC%A7%81-%EA%B8%B0%EA%B0%84%EC%A0%9C%EA%B7%BC/'}, {'id': 123, 'type': 'normal', 'company': '굿네이버스 인터내셔날', 'title': '2027년 상반기 신입직원 공개채용', 'major': '인문·사회 / 보건', 'job': 'NGO / 사업', 'deadline': null, 'place': '서울', 'apply': '신청서 작성', 'url': 'https://www.syu.ac.kr/blog/%EA%B5%BF%EB%84%A4%EC%9D%B4%EB%B2%84%EC%8A%A4-%EC%9D%B8%ED%84%B0%EB%82%B4%EC%85%94%EB%84%90-2027%EB%85%84-%EC%83%81%EB%B0%98%EA%B8%B0-%EC%8B%A0%EC%9E%85%EC%A7%81%EC%9B%90-%EA%B3%B5%EA%B0%9C%EC%B1%84/'}, {'id': 124, 'type': 'normal', 'company': '코오롱베니트', 'title': '2026 하반기 채용연계형 인턴 모집', 'major': '컴퓨터·AI / 경영·경제', 'job': 'IT / 경영지원', 'deadline': null, 'place': '서울', 'apply': '신청서 작성', 'url': 'https://www.syu.ac.kr/blog/%EC%BD%94%EC%98%A4%EB%A1%B1%EB%B2%A0%EB%8B%88%ED%8A%B8-2026-%ED%95%98%EB%B0%98%EA%B8%B0-%EC%B1%84%EC%9A%A9%EC%97%B0%EA%B3%84%ED%98%95-%EC%9D%B8%ED%84%B4-%EB%AA%A8%EC%A7%91/'}];
+let type="all", major="전체";
+const today=new Date(); today.setHours(0,0,0,0);
+function dday(date){let d=Math.ceil((new Date(date+"T23:59:59")-today)/86400000); return d<0?"마감":d===0?"D-DAY":"D-"+d}
+function render(){
+ const q=document.getElementById("search").value.toLowerCase();
+ let arr=jobs.filter(j=>(type==="all"||j.type===type)&&(major==="전체"||j.major.includes(major))&&(`${j.company} ${j.title} ${j.job} ${j.major}`).toLowerCase().includes(q));
+ document.getElementById("count").textContent=`${arr.length}건`;
+ document.getElementById("listTitle").textContent=type==="recommend"?"추천채용":type==="normal"?"일반채용":"최근 업로드 채용공고";
+ document.getElementById("list").innerHTML=arr.length?arr.map(j=>`
+ <article class="card">
+   <div class="badges"><span class="badge ${j.type==="recommend"?"recommend":"normal"}">${j.type==="recommend"?"추천채용":"일반채용"}</span>${j.deadline&&dday(j.deadline).startsWith("D-")&&Number(dday(j.deadline).slice(2))<=3?'<span class="badge urgent">마감임박</span>':''}</div>
+   <div class="company">${j.company}</div><div class="title">${j.title}</div>
+   <div class="meta"><div>전공 <b>${j.major}</b></div><div>직무 <b>${j.job}</b></div><div>근무 <b>${j.place}</b></div><div>마감 <b>${j.deadline?j.deadline.slice(5).replace("-","/"):"원문 확인"}</b></div></div>
+   <div class="deadline"><span class="dleft">지원 마감</span><span class="dday">${j.deadline?dday(j.deadline):"공고 원문 확인"}</span></div>
+   <div class="actions">
+     <a class="btn detail" href="${j.url}" target="_blank" rel="noopener">자세히 보기 ↗</a>
+     <a class="btn apply" href="https://forms.gle/fCz3WaVfGpvRxiGe6" target="_blank" rel="noopener">신청서 작성</a>
+   </div>
+ </article>`).join(""):`<div class="empty">조건에 맞는 채용공고가 없습니다.<br><br>전공계열이나 검색어를 바꿔보세요.</div>`;
+}
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));b.classList.add("active");type=b.dataset.type;render()});
+document.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{document.querySelectorAll(".chip").forEach(x=>x.classList.remove("active"));b.classList.add("active");major=b.dataset.major;render()});
+document.getElementById("search").oninput=render;
+function detail(id){
+ const j=jobs.find(x=>x.id===id);
+ window.open(j.url,"_blank","noopener");
+}
+function apply(id){
+ window.open("https://forms.gle/fCz3WaVfGpvRxiGe6","_blank","noopener");
+}
+render();
+</script>
+</body>
+</html>
